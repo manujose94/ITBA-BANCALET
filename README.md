@@ -1,21 +1,20 @@
 # Bancalet Virtual
 
-Application for the sale of food products for the subject PAW
-Group: paw-2019a-6
+Application for the sale of food products
 
 ## Accounts
 
 _Admin:_
 
-* User: _admin_
+* User: _administrador_
 
-* Password: _admin_
+* Password: _administrador_
 
 _User:_
 
-* User: _user123_
+* User: _usuario_
 
-* Password: _user123_
+* Password: _usuario_
 
 ## Authors
 
@@ -30,33 +29,105 @@ _User:_
 * Views with JSP
 * Persistence with JDBC
 
+### V2
+
+* Persistence with Hibernate
+* New features and BUG fixes
+
+
 ## Production
 
-On the root folder of the project package the application with `mvn package`.
-The final war will be in `/webapp/target/app.war`
+* Clone the repo:
+
+	- git clone https://mlurbeITBA@bitbucket.org/itba/paw-2019a-6.git
+
+* On the root folder of the project package the application with :
+
+	- mvn clean
+	- mvn compile
+	- mvn clean package
+
+* You need to configure the following files in order to launch it:
+
+	- Install postgres
+
+	- Create user postgres: myuser mypass
+
+	- Create if necesary DB: Bancalet
+
+	- DB tables are in the folder: `Bancalet/persistence/src/main/resources/schema.sql`
+
+	- Create the tables in a postgres database: \i Bancalet/persistence/src/main/resources/schema.sql
+
+	- Propierties: `Bancalet/webapp/src/main/resources/config/application.propierties`
+
+	- Copy the app.war file that was generated in the Bancalet / webapp / target folder on your web server
+
+	- Deploy the app.war in tomcat, generally it will be at: `http://localhost:8080/app/`.
+
 
 ## Development
 
-DB tables: /persistence/src/main/resources/schema.sql
-Propierties: /webapp/src/main/resources/config/application.propierties
-Deploy the app.war in tomcat, generally it will be `http://localhost:8080/app/`. Then start tomcat and get working
+* Install postgres:
+
+	- Create user postgres: myuser mypass
+
+	- Create if necesary DB: Bancalet
+
+	- Create if necesary DB: BancaletTest (for mvn test only)
+
+* For developing:
+
+	- Must use jdk version 1.8
+
+	- If you are using Eclipse you can install Run-Jetty from Eclipse Marketplace for more comfort or configure a apache tomcat server or other
+
+* Clone repository into your eclipse workspace:
+
+ 	- git clone https://mlurbeITBA@bitbucket.org/itba/paw-2019a-6.git
+
+	- You can configure your `.gitignore` to ignore files like `.classpath` and more temporally files
+
+	- In eclipse, select Open > Existing Maven Projects > project folder location
+
+* You need to configure the following files in order to launch it:
+
+	- DB tables: `Bancalet/persistence/src/main/resources/schema.sql`
+
+	- Propierties: `Bancalet/webapp/src/main/resources/config/application.propierties`
+
+* Launch
+
+	- Eclipse > Run As > Run on Jetty
+
+	- If everything went well, generally it will be at:  `http://loaclhost:8080/webapp/` and use the application
 
 ## Deploy pampero ITBA
 
-* Clonar el repositorio:
-ssh mlurbe@pampero.itba.edu.ar
-git clone https://mlurbeITBA@bitbucket.org/itba/paw-2019a-6.git
+* Clone the repo:
 
-* Compilar dentro de la carpeta Bancalet:
-mvn clean
-mvn compile:compile
-mvn install
-mvn package
+	- ssh mlurbe@pampero.it.itba.edu.ar
 
-* Copiar por sft el .war generado:
-sftp paw-2019a-6@10.16.1.110
-put Bancalet/webapp/target/app.war
+	- git clone https://mlurbeITBA@bitbucket.org/itba/paw-2019a-6.git
 
-* Crear las tablas en la base de datos:
-\i Bancalet/persistence/src/main/resources/schema.sql
-psql -h 10.16.1.110 -U paw-2019a-6
+* On the root folder of the project package the application with :
+
+	- mvn clean
+	- mvn compile
+	- mvn clean package
+
+* Copy the app.war file that was generated in the `Bancalet/webapp/target` folder by sft to:
+
+	- sftp paw-2019a-6@10.16.1.110
+
+	- put Bancalet/webapp/target/app.war
+
+* Create/Update the tables in the postgres database:
+
+	- Run database script if necessary to backup any table data.
+
+	- psql -h 10.16.1.110 -U paw-2019a-6
+
+	- \i Bancalet/persistence/src/main/resources/schema.sql
+
+	- Run a script if necessary to restore a backup of the data in the tables
