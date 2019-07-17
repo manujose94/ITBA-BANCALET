@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/">
+          <i class=" material-icons">arrow_back</i>
+        </ion-back-button>
+      </ion-buttons>
+      <ion-title>{{ item.name }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  <ion-content padding>
+   
+    <ion-card *ngIf="item">
+
+        <ion-item lines="none">
+            <ion-avatar item-start>
+                <img src="assets/img/type_food/{{item.tipo}}.png">
+            </ion-avatar>
+            <h2> {{ item.name }}</h2>
+            
+
+          </ion-item>
+          <ion-item lines="none">
+          <ion-note>
+              Publicado el {{ item.fechaPublicacion }}
+          </ion-note>
+        </ion-item>
+      <img *ngIf="item.image" src="data:image/jpeg;base64,{{item.image}}"/> 
+      <ion-card-content text-center>
+         
+          <ion-item lines="none">
+              <i class=" material-icons">favorite</i>
+              <ion-label text-wrap>{{item.numeroVisitas }}</ion-label>
+         </ion-item>
+        <ion-item lines="none">
+            <i class=" material-icons">subject</i>
+          <ion-label>{{ item.description }}</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+            <i class=" material-icons">monetization_on</i>
+            <ion-label>Precio: {{ item.price }}$</ion-label>
+          </ion-item>
+   
+        <ion-item lines="none" *ngIf="seller" >
+            <i class=" material-icons">face</i>
+          <ion-label text-wrap>Vendedor: {{ seller.username }}</ion-label>
+        </ion-item>
+   
+        <ion-item lines="none">
+            <i class=" material-icons">event</i>
+          <ion-label text-wrap>Fecha Caducidad: {{item.fechaCaducidad }}</ion-label>
+        </ion-item>
+        <ion-item lines="none" *ngIf="item.estado==1">
+            <i class=" material-icons">help_outline</i>
+            <ion-label >Estado: <i class=" material-icons">check_circle</i></ion-label>
+            
+            
+        </ion-item>
+        <ion-item lines="none" *ngIf="item.estado==0">
+            <i class=" material-icons">help_outline</i>
+            <ion-label >Estado: <i class=" material-icons">do_not_disturb_on</i></ion-label>
+            
+          </ion-item>
+        
+          <ion-button shape="round" *ngIf="item.idVendedor!=userID && item.estado==1" (click)="onContactar(itemID)" fill="outline"> <ion-icon slot="mail" name="star"></ion-icon>Contactar</ion-button>
+          
+          <ion-button shape="round"   *ngIf="item.idVendedor==userID && item.estado==1" fill="outline" color="secondary" [routerLink]="['/', 'edititem', itemID]" >Editar</ion-button>
+
+          <ion-button shape="round" *ngIf="item.idVendedor==userID && item.estado==1" (click)="onDeleteItem(itemID)" fill="outline" color="danger"> <ion-icon slot="mail" name="star"></ion-icon>Eliminar</ion-button>
+      </ion-card-content>
+    </ion-card>
+    
+  </ion-content>

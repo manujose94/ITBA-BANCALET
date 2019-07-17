@@ -1,0 +1,7 @@
+{
+  "name": "academyMenuSub",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+          <i class=" material-icons">menu</i>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>¿Necesitas ayuda?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form  [formGroup]="contactUserForm">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-item>
+              <ion-input  name="asunto" formControlName="asunto" type="text" placeholder="Resume tu problema"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.asunto">
+                <div class="error-message" *ngIf="contactUserForm.get('asunto').hasError(validation.type) && (contactUserForm.get('asunto').dirty || contactUserForm.get('asunto').touched)">
+                  <ion-text color="warning">
+                  {{ validation.message }}
+                </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input name="mensaje" formControlName="mensaje" type="text" placeholder="Describe tu problema" clearInput  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.mensaje">
+                <div class="error-message" *ngIf="contactUserForm.get('mensaje').hasError(validation.type) && (contactUserForm.get('mensaje').dirty || contactUserForm.get('mensaje').touched)">
+                  <ion-text color="warning">
+                  {{ validation.message }}
+                </ion-text>
+                </div>
+              </ng-container>
+            </div>
+          <ion-button shape="round" expand="full"  color="primary" [disabled]="!contactUserForm.valid" (click)="contactar()" tappable>
+              <i class=" material-icons">exit_to_app</i>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button>  <i class=" material-icons">arrow_back</i></ion-back-button>
+      </ion-buttons>
+    <ion-title>Editar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form  [formGroup]="onRegisterForm">
+        <ion-grid>
+          <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <div padding>
+
+  
+
+                <ion-item>
+                  <ion-input name="password"  formControlName="password" type="password" placeholder="Contraseña nueva"  required></ion-input>
+                </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.password">
+                    <div class="error-message" *ngIf="onRegisterForm.get('password').hasError(validation.type) && (onRegisterForm.get('password').dirty || onRegisterForm.get('password').touched)">
+                      <ion-text color="warning">
+                      {{ validation.message }}
+                    </ion-text>
+                    </div>
+                  </ng-container>
+                </div>
+                <ion-item>
+                  <ion-input name="confirmPassword"  formControlName="confirmPassword" type="password" placeholder="Repetir contraseña nueva"  required></ion-input>
+                </ion-item>
+                <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.confirmPassword">
+                    <div class="error-message" *ngIf="onRegisterForm.get('confirmPassword').hasError(validation.type) && (onRegisterForm.get('confirmPassword').dirty || onRegisterForm.get('confirmPassword').touched)">
+                        <ion-text color="warning">
+                          {{ validation.message }}
+                        </ion-text>
+                      </div>
+                  </ng-container>
+                </div>
+      
+        
+              </div>
+              
+           
+              <ion-button shape="round" expand="full"  color="tertiary" [disabled]="!onRegisterForm.valid" (click)="signUp()" tappable>
+                  <i class=" material-icons">exit_to_app</i>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    
+</ion-content>

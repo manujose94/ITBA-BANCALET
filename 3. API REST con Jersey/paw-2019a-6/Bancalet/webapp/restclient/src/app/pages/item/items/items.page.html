@@ -1,0 +1,130 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+            <i class=" material-icons">menu</i>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>Productos</ion-title>
+    </ion-toolbar>
+    <!-- fab placed to the top end -->
+    <ion-fab vertical="top" horizontal="end" slot="fixed" >
+            <ion-fab-button color="success" expand="block" routerLink="/additem" routerDirection="forward">
+              <i class=" material-icons">add</i>
+            </ion-fab-button>
+          </ion-fab>
+
+          <ion-searchbar [(ngModel)]="searchItem" (ionChange)="searchTipoChanged()"></ion-searchbar>
+          <ion-item>
+          <ion-label>Seleccionar Tipo</ion-label>
+          <ion-avatar *ngIf="tipoSelected">
+              <img src="assets/img/type_food/{{tipoSelected}}.png">
+          </ion-avatar>
+          <ion-select [(ngModel)]="type" (ionChange)="searchTipoChanged()">
+            <ion-select-option value="" selected>Todos</ion-select-option>
+            <ion-select-option   *ngFor="let tipo of tipos" value="{{tipo.id}}"  >
+                {{ tipo.name}}                   
+              </ion-select-option> 
+            </ion-select>
+          </ion-item>
+         
+              <ion-grid>
+                  <ion-row>
+                    <ion-col size="6" size-sm>
+                        <ion-item>
+                        <ion-label>Tipo de Caducidad</ion-label>
+                        <ion-select [(ngModel)]="itemTipoCaducidad" (ionChange)="itemTipoCaducidadChanged()" interface="action-sheet">
+                          <ion-select-option value="" selected>Anular</ion-select-option>
+                          <ion-select-option value="1" selected>Menor a</ion-select-option>
+                          <ion-select-option value="2" selected>Mayor a</ion-select-option>   
+                      </ion-select>
+                    </ion-item>
+        </ion-col>
+        <ion-col  size="6">
+            <ion-item lines="none" > 
+             <i class=" material-icons">date_range</i>
+            <ion-label position="floating">Fecha </ion-label>
+            <ion-datetime disabled="{{!itemTipoCaducidad}}" name="fecha_caducidad" [(ngModel)]="fecha_caducidad" displayFormat="YYYY-MM-DD" placeholder="{{today}}" min="{{today}}" max="2040-12-09">  
+            </ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+      
+
+          <ion-list>
+              <ion-list-header>
+                  <ion-grid>
+                      <ion-row>
+                        <ion-col size="6" size-sm>
+                  <ion-item lines="none">Rango Precio &nbsp; &nbsp;&nbsp; 
+                      <ion-badge item-end color="dark">{{slider.lower}}</ion-badge>
+                      &nbsp;-&nbsp;
+                      <ion-badge item-end color="dark">{{slider.upper}}</ion-badge>
+                     
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6" align-items-end size-sm>
+                      <ion-button shape="round" (click)="searchTipoChanged()" disabled="{{ !onFiltro }}"> <i class=" material-icons">search</i></ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+              
+              </ion-list-header>
+              <ion-item lines="none">
+                <ion-range dualKnobs="true" pin="true" min={{min}} max={{max}} [(ngModel)]="slider" (ionChange)="onSliderChange(slider)" color="dark">
+                  <ion-label range-left>{{min}}</ion-label>
+                  <ion-label range-right>{{max}}</ion-label>
+                  <ion-icon slot="start" size="small" name="cash"></ion-icon>
+                  <ion-icon slot="end" name="cash"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-list>
+          
+  </ion-header>
+  
+    <ion-content>
+       
+
+        <ion-refresher slot="fixed" 
+        (ionRefresh)="ionRefresh($event)" 
+        (ionPull)="ionPull($event)" 
+        (ionStart)="ionStart($event)">
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Tirar para refrescar"
+            refreshingSpinner="circles"
+            refreshingText="Actualizando...">
+          </ion-refresher-content>
+        </ion-refresher>
+
+      <ion-content>
+            
+     
+      
+       
+        
+    <ion-list>    
+     <ion-item button *ngFor="let item of items" [routerLink]="['/', 'item-details', item.key]">
+      <ion-avatar slot="start">
+          <img src="assets/img/type_food/{{item.value.tipo}}.png">
+      </ion-avatar>
+      <ion-row>
+          <ion-col>            
+                  <ion-label class="notification-title" >{{ item.value.name }}&nbsp; &nbsp; <small class="date-notification"><strong>Publicado: </strong>&nbsp; {{ item.value.fechaPublicacion.substring(0,10) }}</small> </ion-label>
+                  <p class="text-notification"><i class=" material-icons">monetization_on</i> &nbsp;Precio: {{ item.value.price }}$ </p> 
+                  <p class="text-notification"><i class=" material-icons">event</i>&nbsp;Fecha Caducidad : {{ item.value.fechaCaducidad.substring(0,10) }} </p> 
+          </ion-col>
+      </ion-row>
+      
+     </ion-item>
+     
+        
+        </ion-list>
+     
+    </ion-content>
+
+    <script>
+        const dualRange = document.querySelector('#dual-range');
+        dualRange.value = { lower: 33, upper: 60 };
+    </script>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="defaultPattern"
+		value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+	<appender name="root-appender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>5</maxHistory>
+			<fileNamePattern>logs/warnings.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${defaultPattern:-}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="bancalet-appender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>5</maxHistory>
+			<fileNamePattern>logs/bancalet.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${defaultPattern:-}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="bancalet-appender-warnings"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>5</maxHistory>
+			<fileNamePattern>logs/bancaletWarnings.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${defaultPattern:-}</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="bancalet-wanings" level="WARN" additivity="false">
+		<appender-ref ref="bancalet-appender-warnings" />
+	</logger>
+
+	<logger name="bancalet-info" level="INFO" additivity="false">
+		<appender-ref ref="bancalet-appender" />
+	</logger>
+</configuration>

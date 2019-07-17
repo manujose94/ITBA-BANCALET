@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button>
+              <ion-back-button>  <i class=" material-icons">arrow_back</i></ion-back-button>
+          </ion-back-button>
+        </ion-buttons>
+    <ion-title>Editar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form  [formGroup]="onRegisterForm">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+
+
+            <ion-item>
+                <ion-label position="stacked">Ciudad</ion-label>
+              <ion-input  name="city"  formControlName="city"  type="text" placeholder="{{user.city}}"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.city">
+                <div class="error-message" *ngIf="onRegisterForm.get('city').touched && onRegisterForm.get('city').hasError('required')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>        
+            <ion-item>
+                <ion-label position="stacked">Direccion</ion-label>
+              <ion-input  name="direccion" formControlName="direccion" type="text" placeholder="{{user.direccion}}"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.direccion">
+                <div class="error-message" *ngIf="onRegisterForm.get('direccion').touched && onRegisterForm.get('direccion').hasError('direccion')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+                <ion-label position="stacked">Codigo</ion-label>
+              <ion-input  name="code" formControlName="code" type="text" placeholder="{{user.code}}"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.code">
+                <div class="error-message" *ngIf="onRegisterForm.get('code').touched && onRegisterForm.get('code').hasError('code')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+                <ion-label position="stacked">Telefono</ion-label>
+              <ion-input  name="telf" formControlName="telf" type="text" placeholder="{{user.telf}}"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.telf">
+                <div class="error-message" *ngIf="onRegisterForm.get('telf').touched && onRegisterForm.get('telf').hasError('telf')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+                <ion-label position="stacked">Pais</ion-label>
+                <ion-select placeholder="Seleccionar Pais" formControlName="country" [(ngModel)]="country" (ionChange)="onChange(country)">
+                    <ion-select-option   *ngFor="let cc of currencyList" value="{{ cc.name }}"  >
+                        {{cc.name + ' ' + cc.code}}
+                     
+                    </ion-select-option>
+                </ion-select>
+              </ion-item>
+          </div>
+          
+       
+          <ion-button shape="round" expand="full"  color="tertiary" [disabled]="!onRegisterForm.valid" (click)="signUp()" tappable>
+              <i class=" material-icons">exit_to_app</i>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

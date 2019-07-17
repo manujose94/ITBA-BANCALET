@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar>
+    </ion-toolbar>
+</ion-header>
+
+  <ion-content>
+      <ion-grid>
+          <ion-row>
+              <ion-col>
+      <ion-item>
+          <ion-searchbar [(ngModel)]="searchIssue" (ionChange)="searchTipoChanged()"></ion-searchbar>
+          </ion-item>
+             <ion-item>
+              <ion-label>Seleccionar tipo de consulta</ion-label>
+              <ion-select [(ngModel)]="type" (ionChange)="searchTipoChanged()">
+                <ion-select-option value="0" selected>Todos</ion-select-option>
+                <ion-select-option   *ngFor="let tipo of tipos" value="{{tipo.id}}"  >
+                    {{ tipo.name}}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-button shape="round" (click)="searchTipoChanged()" disabled="{{ !onFiltro }}">  <i class=" material-icons">search</i>Search</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-refresher slot="fixed"
+      (ionRefresh)="ionRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Tirar para refrescar"
+          refreshingSpinner="circles"
+          refreshingText="Actualizando...">
+        </ion-refresher-content>
+      </ion-refresher>
+    <ion-content>
+  <ion-list>
+   <ion-item button *ngFor="let issue of issues" [routerLink]="['/', 'issue-details', issue.key]">
+    <ion-row>
+        <ion-col>
+                <ion-label class="notification-title" >Nombre: {{ issue.value.name }}&nbsp; &nbsp; <small class="date-notification"><strong>Contactado: </strong>&nbsp; {{ issue.value.fechaContacto.substring(0,10) }}</small> </ion-label>
+                <p class="text-notification">&nbsp;Asunto: {{ issue.value.asunto }}</p>
+        </ion-col>
+    </ion-row>
+   </ion-item>
+  </ion-list>
+  </ion-content>
+  <script>
+      const dualRange = document.querySelector('#dual-range');
+      dualRange.value = { lower: 33, upper: 60 };
+  </script>

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mensajes Enviados</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+  <ion-content>
+      <ion-refresher slot="fixed" 
+      (ionRefresh)="ionRefresh($event)" 
+     >
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Tirar para refrescar"
+          refreshingSpinner="circles"
+          refreshingText="Actualizando...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+    <ion-content>
+        <ion-label *ngIf="!enviados">
+            <h1>No hay mensajes enviados</h1>
+          </ion-label>
+  <ion-list>   
+    <ion-card button *ngFor="let contacto of contactos"  lines="none" >
+
+      
+      <ion-card-header class="header">
+        <ion-card-subtitle>Fecha del mensaje: {{contacto.value.fechaContacto}}</ion-card-subtitle>
+        <ion-card-title>{{contacto.value.mensaje}}</ion-card-title>
+      </ion-card-header>
+      <div *ngFor="let item of items">
+          <li *ngIf="item.key==contacto.value.itemId" >
+      <ion-card-content > 
+        <ion-item lines="none">
+          <ion-avatar>
+            <img src="assets/img/type_food/{{item.value.tipo}}.png">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ item.value.name }}</h2>
+          </ion-label>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+
+            <ion-label>
+              <i class=" material-icons">subject</i>&nbsp;Descripcion: {{ item.value.description }}&nbsp;
+              &nbsp;&nbsp; <p></p><small class="date-notification"><i class=" material-icons">monetization_on</i>&nbsp;Publicado: {{ item.value.fechaPublicacion }}</small>
+            </ion-label>
+            <p></p>
+            <ion-label>
+                <i class=" material-icons">monetization_on</i>&nbsp;Precio: {{ item.value.price}}
+            </ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </li>
+  </div>
+    </ion-card>
+    
+   
+      
+      </ion-list>
+   
+  </ion-content>

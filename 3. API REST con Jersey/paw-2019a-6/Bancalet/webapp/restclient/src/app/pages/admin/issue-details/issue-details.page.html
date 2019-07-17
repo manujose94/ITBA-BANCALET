@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Consulta de {{ issue.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="issue">
+      <ion-item lines="none">
+          <h2>Asunto: {{ issue.asunto }}</h2>
+        </ion-item>
+        <ion-item lines="none">
+        <ion-note>
+            Contactado el {{ issue.fechaContacto }}
+        </ion-note>
+      </ion-item>
+    <ion-card-content text-center>
+      <ion-item lines="none">
+        <ion-label>Mensaje: {{ issue.mensaje }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Email: {{ issue.email }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" *ngIf="issue.estado==0">
+        <ion-label>Informe: {{ issue.informe }}</ion-label>
+    </ion-item>
+
+      <ion-item lines="none" *ngIf="issue.estado==0">
+          <i class=" material-icons">help_outline</i>
+          <ion-label>Estado: <i class=" material-icons">check_circle</i></ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngIf="issue.estado==1">
+          <i class=" material-icons">help_outline</i>
+          <ion-label >Estado: <i class=" material-icons">check_circle</i></ion-label>
+      </ion-item>
+        <ion-button shape="round" *ngIf="issue.estado==1" (click)="onArchivar()" fill="outline" color="secondary"> <ion-icon slot="mail" name="star"></ion-icon>Archivar</ion-button>
+        <ion-button shape="round" *ngIf="issue.estado==1" (click)="onDeleteIssue()" fill="outline" color="danger"> <ion-icon slot="mail" name="star"></ion-icon>Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

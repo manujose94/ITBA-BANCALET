@@ -1,0 +1,146 @@
+<ion-content  color="primary">
+  <form  [formGroup]="onRegisterForm">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Registrarse</h3>
+          </div>
+          <div padding>
+              <ion-item>
+                  <ion-label>Avatar</ion-label>
+                  <ion-avatar>
+                    <img src="assets/img/avatar/avatar{{avatarId}}.png">
+                  </ion-avatar>
+                  <ion-select #S placeholder="Seleccionar Avatar"  (ionChange)="onChangeAvatar(S.value)">
+                      <ion-select-option   *ngFor="let id of avatar_list" value="{{ id }}"  >
+                        Avatar {{ id }}                   
+                      </ion-select-option>
+                  </ion-select>
+                </ion-item>
+            <ion-item>
+              <ion-input  name="username" formControlName="username" type="text" placeholder="Nombre de usuario"  required></ion-input>
+            </ion-item>
+            
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.username">
+                <div class="error-message" *ngIf="onRegisterForm.get('username').hasError(validation.type) && (onRegisterForm.get('username').dirty || onRegisterForm.get('username').touched)">
+                  <ion-text color="warning">
+                  {{ validation.message }}
+                </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input name="email" formControlName="email" type="email" placeholder="ejemplo@email.com" clearInput  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="onRegisterForm.get('email').hasError(validation.type) && (onRegisterForm.get('email').dirty || onRegisterForm.get('email').touched)">
+                  <ion-text color="warning">
+                  {{ validation.message }}
+                </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input name="password"  formControlName="password" type="password" placeholder="Contraseña"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.password">
+                <div class="error-message" *ngIf="onRegisterForm.get('password').hasError(validation.type) && (onRegisterForm.get('password').dirty || onRegisterForm.get('password').touched)">
+                  <ion-text color="warning">
+                  {{ validation.message }}
+                </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input name="confirmPassword"  formControlName="confirmPassword" type="password" placeholder="Repetir contraseña"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.confirmPassword">
+                <div class="error-message" *ngIf="onRegisterForm.get('confirmPassword').hasError(validation.type) && (onRegisterForm.get('confirmPassword').dirty || onRegisterForm.get('confirmPassword').touched)">
+                    <ion-text color="warning">
+                      {{ validation.message }}
+                    </ion-text>
+                  </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input  name="city"  formControlName="city"  type="text" placeholder="Ciudad"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.city">
+                <div class="error-message" *ngIf="onRegisterForm.get('city').touched && onRegisterForm.get('city').hasError('required')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>        
+            <ion-item>
+              <ion-input  name="direccion" formControlName="direccion" type="text" placeholder="Direccion"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.direccion">
+                <div class="error-message" *ngIf="onRegisterForm.get('direccion').touched && onRegisterForm.get('direccion').hasError('direccion')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input  name="code" formControlName="code" type="text" placeholder="Codigo"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.code">
+                <div class="error-message" *ngIf="onRegisterForm.get('code').touched && onRegisterForm.get('code').hasError('code')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+              <ion-input  name="telf" formControlName="telf" type="text" placeholder="Telefono"  required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.telf">
+                <div class="error-message" *ngIf="onRegisterForm.get('telf').touched && onRegisterForm.get('telf').hasError('telf')">
+                  <ion-text color="warning">
+                    {{ validation.message }}
+                  </ion-text>
+                </div>
+              </ng-container>
+            </div>
+            <ion-item>
+                <ion-label>Pais</ion-label>
+                <ion-select placeholder="Seleccionar Pais" formControlName="country" [(ngModel)]="country" (ionChange)="onChange(country)">
+                    <ion-select-option   *ngFor="let cc of currencyList" value="{{ cc.name }}"  >
+                        {{cc.name + ' ' + cc.code}}
+                     
+                    </ion-select-option>
+                </ion-select>
+              </ion-item>
+          </div>
+          
+       
+          <ion-button shape="round" expand="full" fill="outline" color="tertiary" [disabled]="!onRegisterForm.valid" (click)="signUp()" tappable>
+            <ion-icon name="log-in"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+ 
+  <div text-center margin-top>
+    <span (click)="goToLogin()" tappable>
+      <ion-text color="light">
+        <strong>Ya tengo una cuenta!</strong>
+      </ion-text>
+    </span>
+  </div>
+</ion-content>

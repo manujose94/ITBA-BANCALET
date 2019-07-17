@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+<ion-item>
+    <ion-searchbar [(ngModel)]="searchuser" (ionChange)="searchTipoChanged()"></ion-searchbar>
+    </ion-item>
+       <ion-item>
+        <ion-label>Seleccionar tipo de consulta</ion-label>
+        <ion-select [(ngModel)]="type" (ionChange)="searchTipoChanged()">
+          <ion-select-option value="" selected>Todos</ion-select-option>
+          <ion-select-option value="1" selected>ROLE ADMIN</ion-select-option>
+          <ion-select-option value="2" selected>ROLE USER</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+          <ion-button shape="round" (click)="searchTipoChanged()" disabled="{{ !onFiltro }}"><i class=" material-icons">search</i>Search</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-refresher slot="fixed"
+(ionRefresh)="ionRefresh($event)">
+  <ion-refresher-content
+    pullingIcon="arrow-dropdown"
+    pullingText="Tirar para refrescar"
+    refreshingSpinner="circles"
+    refreshingText="Actualizando...">
+  </ion-refresher-content>
+</ion-refresher>
+<ion-content>
+<ion-list>
+<ion-item button *ngFor="let user of users" >
+<ion-row>
+  <ion-col>
+          <ion-label class="notification-title" >Nombre: {{ user.value.username }}&nbsp; &nbsp; <small class="date-notification"><strong>Role: </strong>&nbsp; {{ user.value.role}}</small> </ion-label>
+          <p class="text-notification">&nbsp;email: {{ user.value.email }}</p>
+  </ion-col>
+</ion-row>
+</ion-item>
+</ion-list>
+</ion-content>

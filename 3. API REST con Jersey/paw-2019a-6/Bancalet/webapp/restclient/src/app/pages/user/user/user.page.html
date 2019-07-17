@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button>
+          <i class=" material-icons">arrow_back</i>
+      </ion-back-button>
+        </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+          
+            <ion-card-title>
+                <ion-item lines="none">
+                    <ion-avatar slot="start">
+                        <img src="assets/img/avatar/avatar{{ user.numImg }}.png">
+                      </ion-avatar>
+                      {{user.username}} 
+                </ion-item>
+                <ion-chip *ngIf="isMaxBuyer">
+                  <ion-avatar>
+                    <img src="assets/img/bestbuyer.png">
+                  </ion-avatar>
+                  <ion-label>Mejor Comprador</ion-label>
+                 
+                </ion-chip>
+                <ion-chip  *ngIf="isMaxRated">
+                  <ion-avatar>
+                    <img src="assets/img/bestrated.png">
+                  </ion-avatar>
+                  <ion-label>Mejores Valoraciones</ion-label>
+                  
+                </ion-chip>
+                <ion-chip *ngIf="isMaxVendedor">
+                  <ion-avatar>
+                    <img src="assets/img/bestseller.png">
+                  </ion-avatar>
+                  <ion-label>Mejor Vendedor</ion-label>
+                  
+                </ion-chip>
+            </ion-card-title>
+            <ion-button shape="round" fill="outline" color="secondary" [routerLink]="['/', 'edituser', id]" >Editar</ion-button>
+            <ion-button shape="round" fill="outline" color="danger" [routerLink]="['/', 'editpass', id]" >Cambiar contraseña</ion-button>
+
+        </ion-card-header>
+      
+        <ion-card-content>
+         
+          <ion-item lines="none">
+            <i class=" material-icons">mail</i>
+          <ion-label >{{user.email}}</ion-label>
+        </ion-item>
+              
+        <ion-item>
+          <i class=" material-icons">face</i>
+          <ion-label >{{user.telf}}</ion-label>
+        </ion-item>
+         
+        <ion-item>
+          <i class=" material-icons">map</i>
+        <ion-label>{{user.city}}</ion-label>
+      </ion-item>
+      
+      
+      <ion-item>
+          <i class=" material-icons">markunread_mailbox</i>
+        <ion-label  >{{user.direccion}}</ion-label>
+      </ion-item>
+      
+      <ion-item>
+          
+          <i class=" material-icons">room</i>
+        <ion-label   >{{user.code}}</ion-label>
+      </ion-item>
+      
+
+    
+      <ion-item>
+          <i class=" material-icons">flag</i>
+          <ion-label >{{user.country}}</ion-label>
+          
+        </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      
+</ion-content>

@@ -1,0 +1,12 @@
+# TODO: copy this to application.properties and set the credentials for your database.
+# This should be used only for credentials and other local-only config.
+datasource.url = jdbc:postgresql://localhost/bancalet
+datasource.username = myuser
+datasource.password = mypass
+
+mailing.mail = bancalet.do.not.reply@gmail.com
+mailing.password = @bancaletVirtual$97
+mailing.host = smtp.gmail.com
+mailing.port = 587
+
+app.url = http://localhost:8080/webapp/

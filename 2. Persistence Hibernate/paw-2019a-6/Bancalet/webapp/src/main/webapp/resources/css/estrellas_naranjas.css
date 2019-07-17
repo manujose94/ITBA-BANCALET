@@ -1,0 +1,29 @@
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: orange;
+  font-size: xx-large;
+}
+
+.clasificacionOrange {
+  direction: rtl;
+  text-align: center;
+  unicode-bidi: bidi-override;
+   color: orange;
+}

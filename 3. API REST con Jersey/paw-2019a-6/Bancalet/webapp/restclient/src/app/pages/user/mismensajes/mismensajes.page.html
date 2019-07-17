@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+            <i class=" material-icons">menu</i>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>Mensajes Recibidos</ion-title>
+    </ion-toolbar>
+  
+  </ion-header>
+  
+    <ion-content>
+        <ion-refresher slot="fixed" 
+        (ionRefresh)="ionRefresh($event)" 
+       >
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Tirar para refrescar"
+            refreshingSpinner="circles"
+            refreshingText="Actualizando...">
+          </ion-refresher-content>
+        </ion-refresher>
+  
+      <ion-content>
+          <ion-label *ngIf="!recibidos">
+              <h1>No hay mensajes recibidos</h1>
+            </ion-label>
+    <ion-list>    
+      <ion-card button *ngFor="let contacto of contactos"  lines="none" > 
+        <ion-card-header class="header">
+          <ion-card-subtitle>Fecha del mensaje: {{contacto.value.fechaContacto}}</ion-card-subtitle>
+          <ion-card-title>{{contacto.value.mensaje}}</ion-card-title>
+        </ion-card-header>
+        <div *ngFor="let item of items">
+          <li *ngIf="item.key==contacto.value.itemId" >
+        <ion-card-content> 
+       
+          <ion-item lines="none">
+              <ion-grid>
+                  <ion-row>      
+            <ion-avatar>
+              <img src="assets/img/type_food/{{item.value.tipo}}.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ item.value.name }}</h2>
+            </ion-label>
+          
+        </ion-row>
+          <ion-row>
+            <ion-col>
+  
+              <ion-label>
+                  <i class=" material-icons">subject</i>&nbsp;Descripcion: {{ item.value.description }}&nbsp;
+                &nbsp;&nbsp; <small class="date-notification">{{ item.value.fechaPublicacion }}</small>
+              </ion-label>
+              <p></p>
+              <ion-label>
+                  <i class=" material-icons">monetization_on</i>&nbsp;Precio: {{ item.value.price}}
+              </ion-label>
+              <ion-button shape="round" color="warning" (click)="onBaja(item.key,contacto.value.idComprador,item)" fill="outline"> <ion-icon slot="mail" name="star"></ion-icon>Baja</ion-button>  
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        </ion-item>
+     
+        </ion-card-content>
+      </li>
+      </div>
+      </ion-card>
+      
+     
+        
+        </ion-list>
+     
+    </ion-content>

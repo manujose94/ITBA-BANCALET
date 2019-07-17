@@ -1,0 +1,84 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+            <i class=" material-icons">menu</i>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>Productos de {{currentUser.username}}</ion-title>
+    </ion-toolbar>
+    <!-- fab placed to the top end -->
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+      <ion-fab-button color="success" expand="block" routerLink="/additem" routerDirection="forward">
+        <i class=" material-icons">add</i>
+      </ion-fab-button>
+    </ion-fab>
+
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button checked value="myitems">
+        <ion-label>Productos</ion-label>
+        <i class=" material-icons">restaurant</i>
+      </ion-segment-button>
+      <ion-segment-button value="mysales">
+        <ion-label>Comprados</ion-label>
+        <i class=" material-icons">shopping_cart</i>
+      </ion-segment-button>
+      <ion-segment-button value="mypurchases">
+        <ion-label>Vendidos</ion-label>
+        <i class=" material-icons">monetization_on</i>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-header>
+
+  <ion-content>
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Tirar para refrescar" refreshingSpinner="circles"
+        refreshingText="Actualizando...">
+      </ion-refresher-content>
+    </ion-refresher>
+
+
+    <ion-list>
+
+      <ion-chip>
+        <ion-label color="primary">Total: {{items.length}}</ion-label>
+      </ion-chip>
+      <ion-card button *ngFor="let item of items" [routerLink]="['/', 'item-details', item.key]" lines="none">
+
+        <ion-item lines="none">
+          <ion-avatar>
+            <img src="assets/img/type_food/{{item.value.tipo}}.png">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ item.value.name }}</h2>
+          </ion-label>
+        </ion-item>
+
+        <ion-card-content>
+
+          <ion-row>
+            <ion-col>
+
+              <ion-label>
+                  <i class=" material-icons">subject</i>&nbsp;Descripcion: {{ item.value.description }}&nbsp;
+                &nbsp;&nbsp; <small class="date-notification"><strong>Publicado:</strong>&nbsp; {{ item.value.fechaPublicacion.substring(0,10) }}</small>
+              </ion-label>
+              <p></p>
+              <ion-label>
+                  <i class=" material-icons">monetization_on</i>&nbsp;Precio: {{ item.value.price}}
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+
+
+
+    </ion-list>
+
+  </ion-content>
+</ion-app>

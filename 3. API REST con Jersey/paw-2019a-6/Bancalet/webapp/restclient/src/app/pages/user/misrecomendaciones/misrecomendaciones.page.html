@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+          <i class=" material-icons">menu</i>
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mis recomendaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-content>
+       
+
+        <ion-refresher slot="fixed" 
+        (ionRefresh)="ionRefresh($event)" 
+        (ionPull)="ionPull($event)" 
+        (ionStart)="ionStart($event)">
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Tirar para refrescar"
+            refreshingSpinner="circles"
+            refreshingText="Actualizando...">
+          </ion-refresher-content>
+        </ion-refresher>
+
+    <ion-content>
+
+        <ion-content>
+            <ion-label *ngIf="!recibidos">
+                <h1>Todavía no tienes recomendaciones, ¡¿a qué esperas a comprar?! <ion-icon name="happy"></ion-icon></h1>
+              </ion-label>
+
+    <ion-list>    
+        <ion-item button *ngFor="let item of items" [routerLink]="['/', 'item-details', item.key]">
+         <ion-avatar slot="start">
+             <img src="assets/img/type_food/{{item.value.tipo}}.png">
+         </ion-avatar>
+         <ion-row>
+             <ion-col>            
+                <ion-label class="notification-title" >{{ item.value.name }}&nbsp; &nbsp; <small class="date-notification"><strong>Publicado: </strong>&nbsp; {{ item.value.fechaPublicacion.substring(0,10) }}</small> </ion-label>
+                <p class="text-notification"><i class=" material-icons">monetization_on</i>&nbsp;Precio: {{ item.value.price }}$ </p> 
+                <p class="text-notification"><i class=" material-icons">event</i>&nbsp;&nbsp;Fecha Caducidad : {{ item.value.fechaCaducidad.substring(0,10) }} </p>
+             </ion-col>
+         </ion-row>
+         
+        </ion-item>
+        
+           
+     </ion-list>
+            
+
+</ion-content>
