@@ -43,6 +43,11 @@ _User:_
 
 [API REST Bancalet Virtual documented](https://github.com/mlurbe97/BANCALET-REST-API/blob/master/README.md)
 
+## **IONIC 4**
+[Ionic4 Project](https://github.com/manujose94/ITBA/tree/master/3.%20API%20REST%20con%20Jersey/paw-2019a-6/Bancalet/webapp/restclient)
+
+Original source code ionic 4 with default images in the following link:[compressed_file_project](https://github.com/manujose94/ITBA/blob/master/3.%20API%20REST%20con%20Jersey/paw-2019a-6/Bancalet/webapp/restclient/compressed_file_project.7z)
+
 ## **Production**
 
 * Clone the repo:
